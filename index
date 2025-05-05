@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vectis U14 Coaches' Vote</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #003366;
+    }
+    .photo {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      object-fit: cover;
+      max-height: 400px;
+    }
+    .blurb {
+      background: #f1f8ff;
+      padding: 15px;
+      border-left: 4px solid #0077cc;
+      margin-bottom: 25px;
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, textarea, input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      margin-top: 25px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vectis U14 Coaches' Vote</h1>
+  <img src="vectis.jpg" alt="Team Photo" class="photo" />
+
+  <label for="name">Coach's Name:</label>
+  <input type="text" id="name" />
+
+  <div class="blurb">
+    <p><strong>Vote for the Most Improved Player of the Season</strong></p>
+    <p>This award recognises the player who has made the biggest strides over the course of the season. That might be in confidence, skill, fitness, attitude, or contribution to the team.</p>
+    <p>Please choose your top three players and say briefly why you’ve selected each one.</p>
+  </div>
+
+  <label for="mi1">1st Choice (Most Improved):</label>
+  <select id="mi1">
+    <option disabled selected value="">-- Choose a player --</option>
+  </select>
+  <label for="mir1">Reason:</label>
+  <textarea id="mir1" rows="2"></textarea>
+
+  <label for="mi2">2nd Choice (Most Improved):</label>
+  <select id="mi2">
+    <option disabled selected value="">-- Choose a player --</option>
+  </select>
+  <label for="mir2">Reason:</label>
+  <textarea id="mir2" rows="2"></textarea>
+
+  <label for="mi3">3rd Choice (Most Improved):</label>
+  <select id="mi3">
+    <option disabled selected value="">-- Choose a player --</option>
+  </select>
+  <label for="mir3">Reason:</label>
+  <textarea id="mir3" rows="2"></textarea>
+
+  <div class="blurb">
+    <p><strong>Vote for the Coaches’ Player of the Season</strong></p>
+    <p>This award is for the player who has consistently impressed across training, matches, and team culture — a standout in terms of attitude, reliability, leadership, and performance.</p>
+    <p>Again, please choose your top three and give a short reason for each selection.</p>
+  </div>
+
+  <label for="cp1">1st Choice (Coaches' Player):</label>
+  <select id="cp1">
+    <option disabled selected value="">-- Choose a player --</option>
+  </select>
+  <label for="cpr1">Reason:</label>
+  <textarea id="cpr1" rows="2"></textarea>
+
+  <label for="cp2">2nd Choice (Coaches' Player):</label>
+  <select id="cp2">
+    <option disabled selected value="">-- Choose a player --</option>
+  </select>
+  <label for="cpr2">Reason:</label>
+  <textarea id="cpr2" rows="2"></textarea>
+
+  <label for="cp3">3rd Choice (Coaches' Player):</label>
+  <select id="cp3">
+    <option disabled selected value="">-- Choose a player --</option>
+  </select>
+  <label for="cpr3">Reason:</label>
+  <textarea id="cpr3" rows="2"></textarea>
+
+  <button onclick="submitForm()">Submit</button>
+
+  <script>
+    const players = [
+      "Adam Hutchinson", "Albert White", "Alfie Horsler", "Archie Tyler", "Blake Mawer",
+      "Charlie Coghlan", "Charlie Flux", "James Burt", "James Redpath", "Joseph Fox",
+      "Josh Styles", "Joshua Ward", "Jude Walton", "Oliver King", "Oliver McGinness",
+      "Oliver Whitehouse", "Oscar Woodcock", "Otis Ripley", "Rory Brown", "Rory Hillier",
+      "Seth Dubyk", "Toby Moles", "Tom Dempsey"
+    ];
+
+    ["mi1", "mi2", "mi3", "cp1", "cp2", "cp3"].forEach(id => {
+      const sel = document.getElementById(id);
+      players.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        sel.appendChild(opt);
+      });
+    });
+
+    function submitForm() {
+      const base = "https://docs.google.com/forms/d/e/1FAIpQLSf0ZF-QBWk_kTgXgGg-BZaeVW1eESC4Kxf4IzVW61TJ3lV8-w/viewform?usp=pp_url";
+      const params = new URLSearchParams({
+        "entry.125764849": document.getElementById("name").value,
+        "entry.512534201": document.getElementById("mi1").value,
+        "entry.1125526044": document.getElementById("mir1").value,
+        "entry.832665786": document.getElementById("mi2").value,
+        "entry.1407292400": document.getElementById("mir2").value,
+        "entry.1479245023": document.getElementById("mi3").value,
+        "entry.1461470378": document.getElementById("mir3").value,
+        "entry.1002605898": document.getElementById("cp1").value,
+        "entry.2098231055": document.getElementById("cpr1").value,
+        "entry.1258273656": document.getElementById("cp2").value,
+        "entry.231625878": document.getElementById("cpr2").value,
+        "entry.973723322": document.getElementById("cp3").value,
+        "entry.1395295345": document.getElementById("cpr3").value
+      });
+      window.location.href = `${base}&${params.toString()}`;
+    }
+  </script>
+</body>
+</html>
